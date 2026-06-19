@@ -268,19 +268,27 @@ export function D2DAISeo() {
 
           {/* iframe wrapper */}
           <div
-            className="w-full max-w-4xl rounded-2xl overflow-hidden"
+            className="w-full max-w-4xl rounded-2xl"
             style={{
               border: "1px solid rgba(37,99,235,0.2)",
               boxShadow: "0 0 0 1px rgba(37,99,235,0.08), 0 24px 64px -12px rgba(0,0,0,0.6)",
-            }}
+              overflow: "hidden",
+              WebkitOverflowScrolling: "touch",
+            } as React.CSSProperties}
           >
             <iframe
               src="https://recommends.aitrustsignals.com"
               title="Does AI Recommend You?"
               width="100%"
-              height="600"
-              className="min-h-[420px] md:min-h-[600px] lg:min-h-[700px]"
-              style={{ border: "none", display: "block", height: "clamp(420px, 60vw, 700px)" }}
+              scrolling="yes"
+              allow="same-origin"
+              style={{
+                border: "none",
+                display: "block",
+                height: "clamp(500px, 80vw, 700px)",
+                touchAction: "pan-y",
+                pointerEvents: "auto",
+              }}
               loading="lazy"
             />
           </div>
