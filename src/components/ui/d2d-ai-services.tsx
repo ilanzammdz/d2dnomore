@@ -305,9 +305,9 @@ export function D2DAIServices() {
           {/* RIGHT — chat demo */}
           <div className="flex flex-col items-center lg:items-start">
             {/* Browser chrome */}
-            <div className="w-full max-w-[440px]">
+            <div className="w-full max-w-[440px] max-h-[560px] flex flex-col">
               <div
-                className="rounded-t-2xl px-4 py-2.5 flex items-center gap-2"
+                className="rounded-t-2xl px-4 py-2.5 flex items-center gap-2 flex-shrink-0"
                 style={{
                   background: "#060D1E",
                   border: "1px solid rgba(37,99,235,0.15)",
@@ -336,14 +336,15 @@ export function D2DAIServices() {
 
               {/* Chat widget */}
               <div
-                className="rounded-b-2xl overflow-hidden"
+                className="rounded-b-2xl overflow-hidden flex-1 min-h-0"
                 style={{
                   border: "1px solid rgba(37,99,235,0.15)",
                   borderTop: "none",
+                  maxHeight: "490px",
                 }}
               >
                 {/* Mobile scale wrapper — only mounts when section scrolls into view */}
-                <div className="chat-demo-scale-wrap">
+                <div className="chat-demo-scale-wrap h-full">
                   {chatReady && <ChatComponent config={CHAT_CONFIG} uiConfig={CHAT_UI} />}
                 </div>
               </div>
@@ -361,7 +362,7 @@ export function D2DAIServices() {
       </div>
 
       <style>{`
-        .chat-demo-scale-wrap { width: 100%; }
+        .chat-demo-scale-wrap { width: 100%; overflow: hidden; }
         .chat-demo-scale-wrap > div { width: 100% !important; max-width: 100% !important; }
       `}</style>
     </section>
