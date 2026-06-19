@@ -249,7 +249,7 @@ export function D2DAISeo() {
         </ContainerScroll>
 
         {/* ── AI Recommends embed ── */}
-        <div className="pb-24 lg:pb-32 -mt-8 flex flex-col items-center gap-8">
+        <div className="pb-24 lg:pb-32 md:-mt-8 flex flex-col items-center gap-8">
           {/* Header */}
           <div className="text-center max-w-2xl">
             <p
@@ -272,21 +272,21 @@ export function D2DAISeo() {
             style={{
               border: "1px solid rgba(37,99,235,0.2)",
               boxShadow: "0 0 0 1px rgba(37,99,235,0.08), 0 24px 64px -12px rgba(0,0,0,0.6)",
+              borderRadius: "1rem",
               overflow: "hidden",
-              WebkitOverflowScrolling: "touch",
             } as React.CSSProperties}
           >
             <iframe
               src="https://recommends.aitrustsignals.com"
               title="Does AI Recommend You?"
               width="100%"
-              scrolling="yes"
+              scrolling="no"
               allow="same-origin"
               style={{
                 border: "none",
                 display: "block",
-                height: "clamp(500px, 80vw, 700px)",
-                touchAction: "pan-y",
+                height: "900px",
+                touchAction: "auto",
                 pointerEvents: "auto",
               }}
               loading="lazy"
