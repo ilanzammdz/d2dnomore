@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -39,6 +40,13 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-[#04081A] text-[#E8EDF5]">
         {children}
+        <Script
+          src="https://widgets.leadconnectorhq.com/loader.js"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          data-widget-id="6a3d75a78ac627665402cf9f"
+          data-source="WEB_USER"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
