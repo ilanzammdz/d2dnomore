@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Script from "next/script";
 import { D2DNavbar } from "@/components/ui/d2d-navbar";
 import { D2DHero } from "@/components/ui/d2d-hero";
 import { D2DComparison } from "@/components/ui/d2d-comparison";
@@ -38,6 +39,14 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <Script
+        src="https://widgets.leadconnectorhq.com/loader.js"
+        data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+        data-widget-id="6a3d75a78ac627665402cf9f"
+        data-source="WEB_USER"
+        strategy="afterInteractive"
+      />
     </>
   );
 }
