@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import {
   CheckCircle, XCircle, Clock, BookOpen, PenLine,
-  RotateCcw, Trophy, ChevronRight, Heart, Stethoscope, AlertCircle
+  RotateCcw, Trophy, ChevronRight, Heart, Stethoscope, AlertCircle, Shuffle
 } from "lucide-react";
 
 // ─── Question Data ────────────────────────────────────────────────────────────
@@ -523,7 +523,7 @@ function formatTime(s: number) {
 
 type Resultado = "correcto" | "incorrecto" | "tiempo";
 type Modo = "multiple" | "escrito";
-type Pantalla = "inicio" | "juego" | "resultados";
+type Pantalla = "inicio" | "barajando" | "juego" | "resultados";
 
 // ─── Pantalla Inicio ──────────────────────────────────────────────────────────
 
@@ -601,7 +601,12 @@ function PantallaInicio({ onIniciar }: { onIniciar: (m: Modo) => void }) {
           </button>
         </div>
 
-        <p className="text-white/20 text-xs mt-8">Las preguntas se muestran en orden aleatorio cada sesión</p>
+        <div className="flex items-center justify-center gap-2 mt-8 px-4 py-2 rounded-full mx-auto w-fit" style={{ background: "rgba(16,185,129,0.07)", border: "1px solid rgba(16,185,129,0.18)" }}>
+          <Shuffle className="w-3.5 h-3.5" style={{ color: "#10B981" }} />
+          <span className="text-xs font-semibold" style={{ color: "rgba(52,211,153,0.7)" }}>
+            Orden 100% aleatorio · diferente cada vez
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -713,6 +718,7 @@ export default function EnfermeriaPage() {
   const [respuestaEscrita, setRespuestaEscrita] = useState("");
   const [mostrarRespuesta, setMostrarRespuesta] = useState(false);
   const [historial, setHistorial] = useState<Resultado[]>([]);
+  const [sesionNum, setSesionNum] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const tiempoTotal = modo === "multiple" ? 30 : 120;
@@ -748,18 +754,23 @@ export default function EnfermeriaPage() {
   }, [indice, pantalla, respondido]);
 
   const iniciarJuego = (m: Modo) => {
-    const shuffled = shuffle(PREGUNTAS).map(q => ({ ...q, opciones: shuffle(q.opciones) }));
-    setPreguntas(shuffled);
+    // Show the barajando screen briefly, then enter the game with a fresh shuffle
     setModo(m);
-    setIndice(0);
-    setPuntaje(0);
-    setHistorial([]);
-    setRespondido(false);
-    setSeleccionada(null);
-    setRespuestaEscrita("");
-    setMostrarRespuesta(false);
-    setTiempoRestante(m === "multiple" ? 30 : 120);
-    setPantalla("juego");
+    setPantalla("barajando");
+    setTimeout(() => {
+      const shuffled = shuffle(PREGUNTAS).map(q => ({ ...q, opciones: shuffle(q.opciones) }));
+      setPreguntas(shuffled);
+      setIndice(0);
+      setPuntaje(0);
+      setHistorial([]);
+      setRespondido(false);
+      setSeleccionada(null);
+      setRespuestaEscrita("");
+      setMostrarRespuesta(false);
+      setTiempoRestante(m === "multiple" ? 30 : 120);
+      setSesionNum(n => n + 1);
+      setPantalla("juego");
+    }, 900);
   };
 
   const seleccionarOpcion = (opcion: string) => {
@@ -792,6 +803,21 @@ export default function EnfermeriaPage() {
   };
 
   if (pantalla === "inicio") return <PantallaInicio onIniciar={iniciarJuego} />;
+
+  if (pantalla === "barajando") return (
+    <div className="min-h-screen flex flex-col items-center justify-center px-4" style={{ background: "linear-gradient(135deg,#04081A 0%,#061220 60%,#04081A 100%)" }}>
+      <div
+        className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
+        style={{ background: "rgba(16,185,129,0.12)", border: "1px solid rgba(16,185,129,0.3)", animation: "spin 0.7s linear infinite" }}
+      >
+        <Shuffle className="w-10 h-10" style={{ color: "#10B981" }} />
+      </div>
+      <p className="text-white font-bold text-lg mb-2">Barajeando preguntas…</p>
+      <p className="text-white/40 text-sm">Nuevo orden aleatorio generado</p>
+      <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+    </div>
+  );
+
   if (pantalla === "resultados") return (
     <PantallaResultados
       puntaje={puntaje} total={PREGUNTAS.length}
@@ -820,6 +846,12 @@ export default function EnfermeriaPage() {
             </button>
             <span className="text-white/20 text-xs">|</span>
             <span className="text-white/40 text-xs">{indice + 1} / {preguntas.length}</span>
+            <div className="flex items-center gap-1 px-2 py-0.5 rounded-full" style={{ background: "rgba(16,185,129,0.08)", border: "1px solid rgba(16,185,129,0.15)" }}>
+              <Shuffle className="w-2.5 h-2.5" style={{ color: "rgba(52,211,153,0.6)" }} />
+              <span className="text-[10px] font-semibold" style={{ color: "rgba(52,211,153,0.6)" }}>
+                Sesión #{sesionNum}
+              </span>
+            </div>
           </div>
 
           <div className="flex items-center gap-3">
