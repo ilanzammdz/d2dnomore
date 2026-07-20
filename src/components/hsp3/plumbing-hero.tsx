@@ -29,8 +29,8 @@ export function PlumbingHero() {
             morphTime={0.8}
             cooldownTime={1.4}
             align="start"
-            className="mt-2 h-[56px] w-full max-w-md sm:mt-4 sm:h-[72px]"
-            textClassName="font-heading font-extrabold tracking-tight text-4xl sm:text-5xl text-accent"
+            className="mt-2 h-[44px] w-full sm:mt-4 sm:h-[72px]"
+            textClassName="font-heading font-extrabold tracking-tight text-3xl sm:text-5xl text-accent whitespace-nowrap"
           />
           <p className="mt-5 max-w-lg text-lg text-muted-foreground">
             Fast, licensed plumbers who show up on time and fix it right the
