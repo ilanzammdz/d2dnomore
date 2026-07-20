@@ -1,0 +1,33 @@
+/*
+ * Scoped theme for the /hsp3 (Pro Plumbers USA) route only.
+ * The @theme inline token mappings (--color-primary, --color-accent, etc.)
+ * are already registered globally by hsp1.css. This file only needs to
+ * provide hsp3's own scoped values for those underlying CSS variables,
+ * under .hsp3-theme rather than :root, so they never leak into the rest
+ * of the D2D No More site (or /hsp1, /hsp2).
+ */
+
+.hsp3-theme {
+  font-family: var(--font-hsp3-sans);
+  --font-heading: var(--font-hsp3-heading);
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.22 0.03 220);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.03 220);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.03 220);
+  --primary: oklch(0.4 0.1 224);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.96 0.01 220);
+  --secondary-foreground: oklch(0.4 0.1 224);
+  --muted: oklch(0.96 0.01 220);
+  --muted-foreground: oklch(0.5 0.02 220);
+  --accent: oklch(0.55 0.21 25);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9 0.01 220);
+  --input: oklch(0.9 0.01 220);
+  --ring: oklch(0.4 0.1 224);
+  --radius: 0.625rem;
+}
