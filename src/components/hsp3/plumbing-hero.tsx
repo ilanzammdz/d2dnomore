@@ -29,7 +29,7 @@ export function PlumbingHero() {
             morphTime={0.8}
             cooldownTime={1.4}
             align="start"
-            className="mt-1 h-[56px] w-full max-w-md sm:h-[72px]"
+            className="mt-2 h-[56px] w-full max-w-md sm:mt-4 sm:h-[72px]"
             textClassName="font-heading font-extrabold tracking-tight text-4xl sm:text-5xl text-accent"
           />
           <p className="mt-5 max-w-lg text-lg text-muted-foreground">
